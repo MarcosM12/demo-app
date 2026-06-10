@@ -1,3 +1,5 @@
+from time import sleep
+
 import requests
 import json
 
@@ -13,20 +15,26 @@ results = {}
 total_retries = 5
 
 for name, url in services.items():
-    for retry in total_retries:
+    for attempt in range(1, total_retries + 2):
         try:
-            response = requests.get(url, timeout=5)
+            response = requests.get(url, timeout=3)
             results[name] = {
                 "status": "UP" if response.status_code == 200 else "WARNING",
                 "status_code": response.status_code
             }
+            break
         except requests.exceptions.RequestException as e:
-            if retry <= 5:
+            if attempt <= total_retries:
+                print(
+                    f"status: Timeout for service: {name}. "
+                    f"Attempt {attempt}/{total_retries} failed. Retrying..."
+                )
+                sleep(1)
                 continue
-
+            
             results[name] = {
                 "status": "DOWN",
-                "error": str(e)
+                "error": str(e),
             }
 
 print(json.dumps(results, indent=2))
