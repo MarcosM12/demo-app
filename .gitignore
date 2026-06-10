@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Environment/secrets
+.env
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Docker local data
+*.tar
