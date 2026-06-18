@@ -83,7 +83,6 @@ def main():
         
         checked_at = datetime.now(timezone.utc)
         start_time = time.perf_counter()
-        attempt=0
 
         for attempt in range(1, MAX_RETRIES + 2):
             try:
