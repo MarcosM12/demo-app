@@ -19,7 +19,7 @@ def connect_postgres_db():
             print("Database not ready. Retrying in 3 seconds... ")
             retries -= 1
             time.sleep(3)
-    raise Exception ("COuld not connect to the database after 5 retries")
+    raise Exception ("Could not connect to the database after 5 retries")
 
 @app.route("/")
 def index():
